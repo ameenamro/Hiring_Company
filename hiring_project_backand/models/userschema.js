@@ -19,12 +19,9 @@ const userSchema = new Schema({
         enum: ["user", "admin"],
         default: "user",
       },
-      profileImage: {
-        data: Buffer, // Store image data as a buffer
-        contentType: String, // Store the content type of the image
-      },
+    
 });
 
-const users = model("users", userSchema);
+const user = model("user", userSchema);
 
-export default users;
+export default user;

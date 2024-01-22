@@ -2,16 +2,27 @@
 import express from 'express';
 import dotenv from "dotenv";
 import UserPage from "./routes/UserPageRouter.js"
+import workerPage from "./routes/WorkerpageRouter.js"
 import { errorHandler } from "./middleware/errorHandling.js";
+import cors from "cors"
+import connectDB from "./config/db.js";
+
 const server = express();
 dotenv.config();
 
 const PORT = process.env.PORT || 4000;
-
+server.use(cors())
+server.use(express.json());
 server.use('/api/v1/user',UserPage);
+server.use('/api/v1/worker',workerPage);
+
+
 server.use(errorHandler);
 
 
-server.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+
+connectDB().then(() => {
+  server.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+  });
 });
