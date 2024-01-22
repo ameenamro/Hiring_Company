@@ -28,7 +28,7 @@ export const isAuth = async (req, res, next) => {
         if (!user) {
           return res.status(404).send("User not found");
         }
-        req.user = user;
+        req.User = user;
 
         next();
       });
@@ -42,7 +42,7 @@ export const isAuth = async (req, res, next) => {
 
 export const isAdmin = (req, res, next) => {
   try {
-    const { role } = req.user;
+    const { role } = req.User;
     if (role !== "admin") {
       res.status(403);
       throw new Error("Access Forbbiden");
