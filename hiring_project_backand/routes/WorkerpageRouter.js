@@ -4,10 +4,9 @@ import { isAdmin, isAuth } from "../util/auth.js";
 
 const router = Router();
 router.post("/register", workercreate);
-router.post("/login", workerlogin);
-router.get("/profile",isAuth, workerProfile);
+router.post("/login",workerlogin);
 router.get("/", dataWorkers);
-router.get("/:id", getWorkerById);
+router.get("/:id",getWorkerById);
 
 
 export default router;

@@ -1,8 +1,16 @@
-import { Container, Typography, TextField, Button, Paper } from "@mui/material";
+import {
+  Container,
+  Typography,
+  TextField,
+  Button,
+  Paper,
+  Snackbar,
+} from "@mui/material";
+import { Alert } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
+import Employeeprofile from "./Employeeprofile";
 import axios from "axios";
-
 function LoginWorker({ isLoggedIn, setIsLoggedIn }) {
   const [username, setUsername] = useState("ameen");
   const [password, setPassword] = useState("");
@@ -11,6 +19,9 @@ function LoginWorker({ isLoggedIn, setIsLoggedIn }) {
   const [user, setuser] = useState("");
   const [isLogin, setIsLogin] = useState(true);
   const navigate = useNavigate();
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
   const gradientBackground = {
     background: "linear-gradient(to right, #e6e8ee, rgb(237, 237, 237)",
@@ -18,22 +29,38 @@ function LoginWorker({ isLoggedIn, setIsLoggedIn }) {
     marginTop: "150px",
     borderRadius: "10px",
   };
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////
+  // alart nafiction
+  const handleSnackbarOpen = (severity, message) => {
+    setSnackbarSeverity(severity);
+    setSnackbarMessage(message);
+    setOpenSnackbar(true);
+  };
+
+  const handleSnackbarClose = () => {
+    setOpenSnackbar(false);
+  };
+///////////////////////////////////////////////
+// resizedata
   const handleToggleForm = () => {
     setIsLogin(!isLogin);
     setEmail("");
     setPassword("");
     setUsername("");
   };
-  const joinuser = () => {
-    navigate("/Login");
+  ////////////////////////////////
+  //send to login page
+  const joinuser = (rs) => {
+    navigate("/login");
   };
-
+////////////////////////
+//loginpage
   const handleLogin = async (e) => {
     e.preventDefault();
 
     if (!isLogin) {
       if (confirmPassword !== password) {
-        window.alert("please enter the same pasword");
+        handleSnackbarOpen("error", "The passwords do not match.");
         setPassword("");
         setconfirmPassword("");
       } else {
@@ -45,14 +72,20 @@ function LoginWorker({ isLoggedIn, setIsLoggedIn }) {
         };
         try {
           const response = await axios.post(
-            "http://localhost:4000/api/v1/worker/register",
+            "https://hiring-company.onrender.com/api/v1/worker/register",
             newRigaster
           );
           setuser(response.data);
           setIsLoggedIn(true);
+          handleSnackbarOpen("success", "Form submitted successfully!");
+
           console.log("Data fetched successfully:", response.data);
         } catch (error) {
           console.error("Error fetching data:", error);
+          handleSnackbarOpen(
+            "error",
+            "Error submitting form. Please try again."
+          );
         }
       }
     } else {
@@ -64,14 +97,17 @@ function LoginWorker({ isLoggedIn, setIsLoggedIn }) {
 
       try {
         const response = await axios.post(
-          "http://localhost:4000/api/v1/worker/login",
+          "https://hiring-company.onrender.com/api/v1/worker/login",
           newlogin
         );
+        console.log("Data fetched successfully:", response.data.id);
         setuser(response.data);
         setIsLoggedIn(true);
 
-        console.log("Data fetched successfully:", response.data);
+        navigate(`/Employeeprofile/${response.data.id}`);
       } catch (error) {
+        handleSnackbarOpen("error", "Error submitting form. Please try again.");
+
         console.error("Error fetching data:", error);
       }
     }
@@ -90,6 +126,20 @@ function LoginWorker({ isLoggedIn, setIsLoggedIn }) {
       }}
       style={gradientBackground}
     >
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={2000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity={snackbarSeverity}
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
       <Paper
         elevation={4}
         sx={{
@@ -169,7 +219,7 @@ function LoginWorker({ isLoggedIn, setIsLoggedIn }) {
           {isLogin ? "Switch to Register" : "Switch to Login"}
         </Button>
         <Button onClick={joinuser} sx={{ mt: 2 }}>
-          Join like User
+          Join AS User
         </Button>
       </Paper>
     </Container>
