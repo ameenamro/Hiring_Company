@@ -17,15 +17,16 @@ const workerSchema = new mongoose.Schema({
     },
 
     profileImage: {
-        data: Buffer, // Store image data as a buffer
+        data:String, // Store image data as a buffer
         contentType: String, // Store the content type of the image
       },
-    profession:{type: String} ,
-    experience: {type: String},
+    rprofession:{type: String} ,
+    expeience: {type: String},
     role: {
         type: String,
-        enum: ["user", "admin"],
-        default: "user",
+        enum: ['admin', 'employee'], // Add valid roles as needed
+        required: true,
+        default:"employee"
       },
 });
 

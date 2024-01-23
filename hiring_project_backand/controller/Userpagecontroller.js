@@ -73,7 +73,12 @@ export const loginUser = async (req, res, next) => {
       );
 
       //* log the user
-      res.send({token});
+      res.send({
+        token, id: existingUser._id,
+
+
+
+      });
     } else {
       res.status(400).send("email or password incorrect");
     }

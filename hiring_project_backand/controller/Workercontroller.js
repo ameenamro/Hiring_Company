@@ -2,6 +2,8 @@ import worker from "../models/warkerschema.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import "dotenv/config.js";
+import User from "../models/userschema.js";
+
 import { isValidObjectId } from "mongoose";
 export const workercreate = async (req, res, next) => {
     try {
@@ -74,7 +76,11 @@ export const workerlogin = async (req, res, next) => {
             );
 
             //* log the user
-            res.send(token);
+            res.send({token, id: existingUser._id,
+
+            
+            
+            });
         } else {
             res.status(400).send("email or password incorrect");
         }
@@ -88,6 +94,7 @@ export const workerProfile = async (req, res, next) => {
 export const dataWorkers = async (req, res, next) => {
     try {
         const AllWorker = await worker.find();
+      AllWorker.forEach((index)=>{index.password=undefined;})
         res.json(AllWorker);
     } catch (error) {
         next(error);
@@ -101,14 +108,13 @@ export const getWorkerById= async (req, res, next) => {
         if (!isValidObjectId(id)) {
           throw new Error("ID not Valid");
         }
-        //find the book
         const findworker = await worker.findById(id);
         //check if exist
         if (!findworker) {
           res.status(404);
           throw new Error("worker not found");
         }
-        //send the book
+        findworker.password=undefined;
         return res.json(findworker);
       } catch (error) {
         next(error);

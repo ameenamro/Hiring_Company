@@ -8,11 +8,21 @@ import Admin from "../pages/Admin";
 import Employee from "../pages/Employee";
 import User from "../pages/User";
 import axios from "axios";
+import Employeeprofile from "../pages/Employeeprofile";
 import LoginWorker from "../pages/LoginWorker";
 function Routers() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setuser] = useState("");
+  const initialIsLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  const token = localStorage.getItem('token') ;
 
+  const [isLoggedInToken, setIsLoginToken] = useState("token");
+  const [isLoggedIn, setIsLoggedIn] = useState(initialIsLoggedIn);
+  // Update local storage whenever isLoggedIn changes
+  useEffect(() => {
+    localStorage.setItem('isLoggedIn', isLoggedIn);
+    localStorage.setItem('isLoggedInToken', isLoggedInToken)
+     
+  }, [isLoggedIn]);
+ 
 
   return (
     <Router>
@@ -25,6 +35,8 @@ function Routers() {
             <Login
               isLoggedIn={isLoggedIn}
               setIsLoggedIn={setIsLoggedIn}
+              isLoggedInToken={isLoggedInToken}
+              setIsLoginToken={setIsLoginToken}
             ></Login>
           }
         />
@@ -34,12 +46,19 @@ function Routers() {
             <LoginWorker
               isLoggedIn={isLoggedIn}
               setIsLoggedIn={setIsLoggedIn}
+              
             ></LoginWorker>
           }
         />
         <Route path="/Home" element={<Home></Home>} />
-        <Route path="/User" element={<User></User>} />
+        <Route path="/User" element={<User
+           isLoggedInToken={isLoggedInToken}
+           setIsLoginToken={setIsLoginToken}
+        
+        
+        ></User>} />
         <Route path="/Employee/:id" element={<Employee></Employee>} />
+        <Route path="/Employeeprofile/:id" element={<Employeeprofile></Employeeprofile>} />
         <Route path="/Admin" element={<Admin></Admin>} />
         
 
