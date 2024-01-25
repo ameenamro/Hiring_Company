@@ -14,12 +14,12 @@ import { Link } from "react-router-dom";
 
 function NavbarApp({ setIsLoggedIn, isLoggedIn }) {
   const gradientBackground = {
-    background: "linear-gradient(to right, #30302edf, #7a451f)",
+    background: "linear-gradient(to right, #f7f7f0df, #aaa0a0)",
     padding: "20px",
   };
 
   const brand = {
-    background: "linear-gradient(to right, #c31414, #f4f2f2)",
+    background: "linear-gradient(to right, blue, #9d7d0a)",
     WebkitBackgroundClip: "text",
     color: "transparent",
     display: "inline-block",
@@ -52,7 +52,7 @@ function NavbarApp({ setIsLoggedIn, isLoggedIn }) {
         }}
       >
         <i className="fa fa-car me-3" style={brand}>
-          homerepair
+          HomeRepair
         </i>
       </Typography>
       <Typography
@@ -69,9 +69,9 @@ function NavbarApp({ setIsLoggedIn, isLoggedIn }) {
           Home
         </Button>
         <Button color="inherit" component={Link} to="/User">
-          Serves
+          Services
         </Button>
-        <Button color="inherit">About Us</Button>
+        <Button color="inherit" component={Link} to="/AboutUs">About Us</Button>
      
         <Button color="inherit">Contact</Button>
      
@@ -141,7 +141,7 @@ function NavbarApp({ setIsLoggedIn, isLoggedIn }) {
         </Button>
       </ListItem>
       <ListItem>
-        <Button color="inherit">About Us</Button>
+        <Button color="inherit"component={Link} to="/AboutUs">About Us</Button>
       </ListItem>
       <ListItem>
         <Button color="inherit">Contact</Button>

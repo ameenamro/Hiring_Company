@@ -40,8 +40,8 @@ function Login({
 
   const gradientBackground = {
     background: "linear-gradient(to right, #e6e8ee, rgb(237, 237, 237)",
-    padding: "15px",
-    marginTop: "150px",
+    padding: "150px",
+    marginTop: "110px",
     borderRadius: "10px",
   };
   const handleToggleForm = () => {
@@ -56,7 +56,7 @@ function Login({
 
   const handleLogin = async (e) => {
     e.preventDefault();
-if(isLoggedInToken=="token"&& isLoggedIn){          handleSnackbarOpen("error", "you are aready here.");             }
+if(isLoggedInToken=="token"&& isLoggedIn){ handleSnackbarOpen("error", "you are aready here.");             }
 
 else{
     if (!isLogin) {
@@ -78,7 +78,9 @@ else{
           );
           setuser(response.data);
           setIsLoggedIn(true);
+          
           handleSnackbarOpen("success", "Form submitted successfully!");
+          navigate(`/Employeeprofile/${response.data.id}`);
           console.log("Data fetched successfully:", response.data);
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -157,7 +159,7 @@ else{
         }}
       >
         <Typography variant="h5" sx={{ mb: 2 }}>
-          {isLogin ? "Login" : "Register"}
+          {isLogin ? "User Login" : "User Register "}
         </Typography>
         <form onSubmit={handleLogin}>
           <TextField

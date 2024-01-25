@@ -1,0 +1,41 @@
+
+  
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes at least the full height of the viewport */
+    margin: 0;
+  }
+ 
+  /* User.css */
+
+.cont {
+    /* ... your existing styles */
+  
+    .paper-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+  
+    .paper {
+      border-radius: 250px;
+      max-width: 230px;
+      width: 100%;
+      padding: 20px;
+      text-align: center;
+      margin: 20px 7px;
+      transition: transform 0.3s ease-in-out; /* Add transition for smooth effect */
+  
+      &:hover {
+        transform: scale(1.05); /* Scale up the element on hover */
+      }
+  
+      &:active {
+        transform: scale(1); /* Reset scale on click */
+      }
+    }
+  }
+  
+  

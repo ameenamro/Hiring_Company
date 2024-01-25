@@ -16,6 +16,9 @@ function LoginWorker({ isLoggedIn, setIsLoggedIn }) {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
+  
+  const [profession, setprofession] = useState("");
+  const [desraption, setdesraption] = useState("");
   const [user, setuser] = useState("");
   const [isLogin, setIsLogin] = useState(true);
   const navigate = useNavigate();
@@ -25,8 +28,9 @@ function LoginWorker({ isLoggedIn, setIsLoggedIn }) {
 
   const gradientBackground = {
     background: "linear-gradient(to right, #e6e8ee, rgb(237, 237, 237)",
-    padding: "15px",
-    marginTop: "150px",
+    padding: "150px",
+
+    marginTop: "110px",
     borderRadius: "10px",
   };
   ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -40,8 +44,8 @@ function LoginWorker({ isLoggedIn, setIsLoggedIn }) {
   const handleSnackbarClose = () => {
     setOpenSnackbar(false);
   };
-///////////////////////////////////////////////
-// resizedata
+  ///////////////////////////////////////////////
+  // resizedata
   const handleToggleForm = () => {
     setIsLogin(!isLogin);
     setEmail("");
@@ -53,8 +57,8 @@ function LoginWorker({ isLoggedIn, setIsLoggedIn }) {
   const joinuser = (rs) => {
     navigate("/login");
   };
-////////////////////////
-//loginpage
+  ////////////////////////
+  //loginpage
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -69,16 +73,18 @@ function LoginWorker({ isLoggedIn, setIsLoggedIn }) {
           email: email,
           password: password,
           confirmPassword: confirmPassword,
+          expeience:desraption,
+          profession:profession,
         };
         try {
           const response = await axios.post(
-            "https://hiring-company.onrender.com/api/v1/worker/register",
+            "http://localhost:4000/api/v1/worker/register",
             newRigaster
           );
           setuser(response.data);
           setIsLoggedIn(true);
           handleSnackbarOpen("success", "Form submitted successfully!");
-
+          const newid = response.data.id;
           console.log("Data fetched successfully:", response.data);
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -97,14 +103,14 @@ function LoginWorker({ isLoggedIn, setIsLoggedIn }) {
 
       try {
         const response = await axios.post(
-          "https://hiring-company.onrender.com/api/v1/worker/login",
+          "http://localhost:4000/api/v1/worker/login",
           newlogin
         );
         console.log("Data fetched successfully:", response.data.id);
         setuser(response.data);
         setIsLoggedIn(true);
-
-        navigate(`/Employeeprofile/${response.data.id}`);
+        const newid = response.data.id;
+        navigate(`/Employeeprofile/${newid}`);
       } catch (error) {
         handleSnackbarOpen("error", "Error submitting form. Please try again.");
 
@@ -151,7 +157,7 @@ function LoginWorker({ isLoggedIn, setIsLoggedIn }) {
         }}
       >
         <Typography variant="h5" sx={{ mb: 2 }}>
-          {isLogin ? "Login" : "Register"}
+          {isLogin ? "Login Worker" : "Register Worker"}
         </Typography>
         <form onSubmit={handleLogin}>
           <TextField
@@ -165,6 +171,7 @@ function LoginWorker({ isLoggedIn, setIsLoggedIn }) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+
           <TextField
             variant="outlined"
             margin="normal"
@@ -204,6 +211,53 @@ function LoginWorker({ isLoggedIn, setIsLoggedIn }) {
               onChange={(e) => setUsername(e.target.value)}
             />
           )}
+
+          {!isLogin && (
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="Descraption"
+              label="Descraption"
+              type="user"
+              id="Descraption"
+              onChange={(e) => setdesraption(e.target.value)}
+            />
+          )}
+
+
+{!isLogin && (
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="profession"
+              label="profession"
+              type="profession"
+              id="profession"
+              onChange={(e) => setprofession(e.target.value)}
+            />
+          )}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           <Button
             type="submit"

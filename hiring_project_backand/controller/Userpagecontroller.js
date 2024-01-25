@@ -2,6 +2,7 @@ import User from "../models/userschema.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import "dotenv/config.js";
+import Worker from "../models/warkerschema.js";
 export const createUser = async (req, res, next) => {
   try {
     //* gett the data from body
@@ -16,8 +17,11 @@ export const createUser = async (req, res, next) => {
     }
     //* find the user in DB
     const existingUser = await User.findOne({ email });
+    const existingUser1 = await Worker.findOne({ email });
+
+
     //* check if user exist
-    if (existingUser) {
+    if (existingUser||existingUser1) {
       res.status(402);
       throw new Error(" User exist in the DB");
     }
@@ -49,8 +53,10 @@ export const loginUser = async (req, res, next) => {
     }
     //* find the user
     const existingUser = await User.findOne({ email });
+    const existingUser1 = await Worker.findOne({ email });
+
     //* check if user exist
-    if (!existingUser) {
+    if (!existingUser||existingUser1) {
       res.status(404);
       throw new Error("no user exist with this email");
     }
