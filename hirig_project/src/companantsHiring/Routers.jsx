@@ -52,6 +52,8 @@ function Routers() {
           }
         />
         <Route path="/Home" element={<HomePage></HomePage>} />
+        <Route path="/" element={<HomePage></HomePage>} />
+
         <Route path="/User" element={<User
            isLoggedInToken={isLoggedInToken}
            setIsLoginToken={setIsLoginToken}
