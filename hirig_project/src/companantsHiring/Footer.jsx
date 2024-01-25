@@ -5,18 +5,20 @@ import { Typography, Container, Grid, Link, Box } from '@mui/material';
 const Footer = () => {
   return (
     <Container
-      component="footer"   maxWidth="xl"
+      component="footer" maxWidth="xl"
       sx={{
-        mt: 5,
-        py: 3,
-        backgroundColor: '#212121',
+        
+        py: 4,
+        backgroundColor: '#212b85',
         color: 'white',
         display: 'flex',
+        marginTop:"auto",
+        borderRadius:"11px",
         flexDirection: 'column',
-
+        paddingBottom:"300px"
       }}
     >
-      <Grid container spacing={2} sx={{ width: '100%' }}>
+      <Grid container spacing={35} >
         {/* Company Info */}
         <Grid item xs={12} md={4}>
           <Typography variant="h6">Your Company</Typography>

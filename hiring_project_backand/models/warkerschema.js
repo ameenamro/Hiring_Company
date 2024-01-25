@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import multer from "multer";
+
 const workerSchema = new mongoose.Schema({
     username:
     {
@@ -16,11 +18,8 @@ const workerSchema = new mongoose.Schema({
         required: true
     },
 
-    profileImage: {
-        data:String, // Store image data as a buffer
-        contentType: String, // Store the content type of the image
-      },
-    rprofession:{type: String} ,
+
+    profession:{type: String} ,
     expeience: {type: String},
     role: {
         type: String,

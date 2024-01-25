@@ -17,8 +17,6 @@ server.use(express.json());
 server.use('/api/v1/user',UserPage);
 server.use('/api/v1/worker',workerPage);
 server.use('/api/v1/jobRES',RESpage);
-
-
 server.use(errorHandler);
 
 

@@ -15,7 +15,7 @@ export const sendjob = async (req, res, next) => {
             throw new Error(" Emaill & password & role are required");
         }
 
-console.log(receiver);
+          console.log(receiver);
         const newjob = await RES.create({
             username, email, number, location, description,receiver
         });
@@ -30,6 +30,7 @@ export const getJob = async (req, res, next) => {
     try {
         // Get the id from params
         const { id } = req.params;
+        
 
         // Find documents in the jobs schema where the 'receiver' field is equal to the provided 'id'
         const jobs = await RES.find({ receiver: id });
@@ -42,4 +43,27 @@ export const getJob = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
+};
+
+export const deleteJob = async (req, res, next) => {
+    try {
+        //get the id
+        const { id } = req.params;
+        // check the id if valid
+        if (!isValidObjectId(id)) {
+          throw new Error("ID not Valid");
+        }
+        //find the book
+        const job = await RES.findById(id);
+        //if book exist
+        if (!job) {
+          return res.status(404).json({ message: "Book Not Found" });
+        } else {
+          //detele the book
+          await RES.deleteOne(job);
+        }
+        res.send("Book deleted successfuly");
+      } catch (error) {
+        next(error);
+      }
 };
