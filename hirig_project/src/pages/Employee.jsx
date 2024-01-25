@@ -34,9 +34,9 @@ function Employee() {
     try {
       const newItem = {
         username: selectedItem.name,
-        description: selectedItem.description,
+        expeience: selectedItem.description,
         email: selectedItem.Email,
-        location: selectedItem.location,
+        location:"jeruslem",
         number: selectedItem.number,
         receiver:employee._id
       };
@@ -97,6 +97,7 @@ function Employee() {
     marginTop: "150px",
     display: "flex",
     flexDirection: "column",
+    padding: "40px",
     alignItems: "center",
   };
 
