@@ -123,10 +123,13 @@ else{
   return (
     <Container
       component="main"
-      maxWidth="md"
+      maxWidth="sm"
       sx={{
         mt: 8,
+        minHeight: "100vh",
+        minWidth:"100vh",
         maxHeight: "150vh",
+        maxWidth:"800px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",

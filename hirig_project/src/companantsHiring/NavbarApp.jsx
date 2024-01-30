@@ -44,6 +44,7 @@ function NavbarApp({ setIsLoggedIn, isLoggedIn }) {
         variant="h6"
         component="div"
         sx={{
+          minWidth:"100wh",
           display: { xs: "none", md: "block" },
           [`@media (max-width: 600px)`]: {
             display: "none", // Hide on small screens
