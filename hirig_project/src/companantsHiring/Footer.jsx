@@ -5,9 +5,10 @@ import { Typography, Container, Grid, Link, Box } from '@mui/material';
 const Footer = () => {
   return (
     <Container
-      component="footer" maxWidth="xl"
+      component="footer" maxWidth="xl" 
       sx={{
-        
+        minWidth:"100vh",
+        minHeight:"30vh",
         py: 4,
         backgroundColor: '#212b85',
         color: 'white',

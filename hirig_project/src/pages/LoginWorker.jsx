@@ -122,10 +122,12 @@ function LoginWorker({ isLoggedIn, setIsLoggedIn }) {
   return (
     <Container
       component="main"
-      maxWidth="md"
+      maxWidth="sm"
       sx={{
-        mt: 8,
-        maxHeight: "150vh",
+        mt: 4,
+
+        minHeight: "100vh",
+        minWidth:"100vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",

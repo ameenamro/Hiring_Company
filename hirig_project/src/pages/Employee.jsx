@@ -28,15 +28,17 @@ function Employee() {
     location: "",
     Email: "",
     number: "",
+    receiver:"",
+
   });
 
   const handleAdd = async () => {
     try {
       const newItem = {
         username: selectedItem.name,
-        expeience: selectedItem.description,
+        description: selectedItem.description,
         email: selectedItem.Email,
-        location:"jeruslem",
+        location:selectedItem.location,
         number: selectedItem.number,
         receiver:employee._id
       };
