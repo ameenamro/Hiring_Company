@@ -17,7 +17,10 @@ function HomePage() {
         Your browser does not support the video tag.
       </video>
       <div className="content">
-        <Container>
+        <Container
+        
+         style={{minWidth:"100wh"}}
+        >
           <Typography variant="h2" className="heading">
             <span
               style={{

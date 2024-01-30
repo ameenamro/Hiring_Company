@@ -44,7 +44,6 @@ function NavbarApp({ setIsLoggedIn, isLoggedIn }) {
         variant="h6"
         component="div"
         sx={{
-          minWidth:"100wh",
           display: { xs: "none", md: "block" },
           [`@media (max-width: 600px)`]: {
             display: "none", // Hide on small screens
@@ -109,6 +108,7 @@ function NavbarApp({ setIsLoggedIn, isLoggedIn }) {
       component="div"
       sx={{
         flexGrow: 1,
+        
         display: { xs: "flex", md: "none" },
         justifyContent: "space-between", // Distribute space between logo and button
         alignItems: "center", // Center items vertically
