@@ -126,7 +126,6 @@ console.log(e);
     const response = await axios.delete(
       `http://localhost:4000/api/v1/jobRES/${e}`
     );
-    location.reload();
 
   } catch (error) {
     console.error("Error fetching missions data:", error);
